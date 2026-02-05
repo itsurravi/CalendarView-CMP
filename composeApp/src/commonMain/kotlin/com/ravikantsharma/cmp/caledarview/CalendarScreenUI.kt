@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
@@ -35,30 +34,13 @@ import cmp.composeapp.generated.resources.Res
 import cmp.composeapp.generated.resources.ic_live_class_calendar_grey_day
 import cmp.composeapp.generated.resources.ic_live_class_calendar_grey_tick
 import cmp.composeapp.generated.resources.ic_live_class_calendar_selected_day
+import com.ravikantsharma.cmp.fromHex
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.todayIn
 import org.jetbrains.compose.resources.painterResource
 import kotlin.time.Clock
-
-// Extension to simulate fromHex if it's not available in CMP common
-fun Color.Companion.fromHex(colorString: String): Color {
-    return Color(longFromHex(colorString))
-}
-
-private fun longFromHex(colorString: String): Long {
-    var data = colorString
-    if (data.startsWith("#")) {
-        data = data.substring(1)
-    }
-    val color = data.toLong(16)
-    return if (data.length <= 6) {
-        color or 0x00000000FF000000L
-    } else {
-        color
-    }
-}
 
 @Composable
 fun MyCustomCalendarScreen(
