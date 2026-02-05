@@ -34,6 +34,7 @@ import cmp.composeapp.generated.resources.Res
 import cmp.composeapp.generated.resources.ic_live_class_calendar_grey_day
 import cmp.composeapp.generated.resources.ic_live_class_calendar_grey_tick
 import cmp.composeapp.generated.resources.ic_live_class_calendar_selected_day
+import com.ravikantsharma.cmp.Greeting
 import com.ravikantsharma.cmp.fromHex
 import kotlinx.datetime.DayOfWeek
 import kotlinx.datetime.LocalDate
@@ -49,6 +50,8 @@ fun MyCustomCalendarScreen(
     var selectedDate by remember { mutableStateOf<LocalDate?>(null) }
     val today = Clock.System.todayIn(TimeZone.currentSystemDefault())
 
+    val platformName = remember { Greeting().platformName() }
+
     Column(
         modifier = modifier.padding(16.dp)
     ) {
@@ -59,7 +62,7 @@ fun MyCustomCalendarScreen(
         CalendarView(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(vertical = 8.dp),
 
             // --- Custom Day Header (Mon, Tue...) ---
             dayHeaderContent = { dayOfWeek ->
@@ -164,7 +167,7 @@ fun MyCustomCalendarScreen(
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Text("Selected: ${selectedDate ?: "None"}")
+        Text("Selected: ${selectedDate ?: "None"} on $platformName")
     }
 }
 
